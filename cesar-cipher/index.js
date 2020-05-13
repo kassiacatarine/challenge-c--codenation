@@ -2,18 +2,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const cesarCipherRouter = require('./src/routes/cesar-cipher');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'src/public')));
 
-// const router = express.Router();
-
-// app.get('/', function(req, res) {
-//   res.send('Olá Mundo!');
-// });
-app.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express'});
-});
+app.use('/', cesarCipherRouter);
 
 app.listen(3000, function() {
   console.log('App de Exemplo escutando na porta 3000!');
